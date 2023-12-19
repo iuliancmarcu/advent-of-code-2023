@@ -1,13 +1,9 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os"
-)
 
-const (
-	inputFile = "day_03/input_2.txt"
+	"github.com/iuliancmarcu/advent-of-code-2023/common"
 )
 
 type PossibleNumber struct {
@@ -24,24 +20,14 @@ type Symbol struct {
 }
 
 func main() {
-	file, err := os.Open(inputFile)
-	if err != nil {
-		fmt.Printf("Error reading file \"%v\"\n", inputFile)
-		return
-	}
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
+	lines := common.ReadFile("day_03/input_2.txt")
 
 	total := 0
 
 	possibleNumbers := make([]PossibleNumber, 0)
 	possibleGears := make([]Symbol, 0)
 
-	l := 0
-	for scanner.Scan() {
-		line := scanner.Text()
-
+	for l, line := range lines {
 		for i := 0; i < len(line); i++ {
 			char := line[i]
 
@@ -85,8 +71,6 @@ func main() {
 				}
 			}
 		}
-
-		l++
 	}
 
 	// now we have all the possible numbers and possibleGears

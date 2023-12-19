@@ -1,13 +1,9 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os"
-)
 
-const (
-	inputFile = "day_01/input_2.txt"
+	"github.com/iuliancmarcu/advent-of-code-2023/common"
 )
 
 var digits = [...]string{
@@ -16,20 +12,11 @@ var digits = [...]string{
 }
 
 func main() {
-	file, err := os.Open(inputFile)
-	if err != nil {
-		fmt.Printf("Error reading file \"%v\"\n", inputFile)
-		return
-	}
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
+	lines := common.ReadFile("day_01/input_2.txt")
 
 	total := 0
 
-	for scanner.Scan() {
-		line := scanner.Text()
-
+	for _, line := range lines {
 		var first byte
 		var last byte
 

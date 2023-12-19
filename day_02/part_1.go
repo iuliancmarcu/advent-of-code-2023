@@ -1,34 +1,24 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os"
 	"strings"
+
+	"github.com/iuliancmarcu/advent-of-code-2023/common"
 )
 
 const (
-	inputFile = "day_02/input_1.txt"
-	maxRed    = 12
-	maxGreen  = 13
-	maxBlue   = 14
+	maxRed   = 12
+	maxGreen = 13
+	maxBlue  = 14
 )
 
 func main() {
-	file, err := os.Open(inputFile)
-	if err != nil {
-		fmt.Printf("Error reading file \"%v\"\n", inputFile)
-		return
-	}
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
+	lines := common.ReadFile("day_02/input_1.txt")
 
 	total := 0
 
-	for scanner.Scan() {
-		line := scanner.Text()
-
+	for _, line := range lines {
 		var gameId int
 		fmt.Sscanf(line, "Game %d:", &gameId)
 
