@@ -15,7 +15,7 @@ var (
 )
 
 func main() {
-	lines := common.ReadFile("day_05/input_1.txt")
+	lines := common.ReadFile("day_05/input.txt")
 
 	var seeds []uint64
 	mappings := make(map[string]([][]uint64))

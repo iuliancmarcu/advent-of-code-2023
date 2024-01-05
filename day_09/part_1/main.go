@@ -9,7 +9,7 @@ import (
 )
 
 func parseInput() [][]int {
-	lines := common.ReadFile("day_09/input_1.txt")
+	lines := common.ReadFile("day_09/input.txt")
 
 	sequences := make([][]int, len(lines))
 

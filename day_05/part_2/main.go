@@ -47,7 +47,7 @@ func (mappingInterval *MappingInterval) OverlapsInterval(interval Interval) (boo
 }
 
 func parseInput() ([]Interval, map[string][]MappingInterval) {
-	lines := common.ReadFile("day_05/input_2.txt")
+	lines := common.ReadFile("day_05/input.txt")
 
 	var seedIntervals []Interval
 

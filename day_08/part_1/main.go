@@ -14,7 +14,7 @@ type Link struct {
 }
 
 func parseInput() (instructions []rune, links map[string]Link) {
-	lines := common.ReadFile("day_08/input_1.txt")
+	lines := common.ReadFile("day_08/input.txt")
 
 	// first line is the list of instructions
 	instructions = []rune(lines[0])

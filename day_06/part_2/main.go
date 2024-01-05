@@ -9,7 +9,7 @@ import (
 )
 
 func parseInput2() (time int, distance int) {
-	lines := common.ReadFile("day_06/input_2.txt")
+	lines := common.ReadFile("day_06/input.txt")
 
 	timeString := strings.Join(strings.Fields(strings.Split(lines[0], "Time:")[1]), "")
 	distanceString := strings.Join(strings.Fields(strings.Split(lines[1], "Distance:")[1]), "")

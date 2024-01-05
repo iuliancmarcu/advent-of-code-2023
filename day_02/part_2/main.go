@@ -7,14 +7,8 @@ import (
 	"github.com/iuliancmarcu/advent-of-code-2023/common"
 )
 
-const (
-	maxRed   = 12
-	maxGreen = 13
-	maxBlue  = 14
-)
-
 func main() {
-	lines := common.ReadFile("day_02/input_1.txt")
+	lines := common.ReadFile("day_02/input.txt")
 
 	total := 0
 
@@ -48,11 +42,7 @@ func main() {
 			}
 		}
 
-		if colors["red"] > maxRed || colors["green"] > maxGreen || colors["blue"] > maxBlue {
-			continue
-		}
-
-		total += gameId
+		total += colors["red"] * colors["green"] * colors["blue"]
 	}
 
 	fmt.Printf("Total is: %v\n", total)

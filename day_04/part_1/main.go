@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	lines := common.ReadFile("day_04/input_1.txt")
+	lines := common.ReadFile("day_04/input.txt")
 
 	totalPoints := 0.0
 

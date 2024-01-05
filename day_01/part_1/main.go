@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	lines := common.ReadFile("day_01/input_1.txt")
+	lines := common.ReadFile("day_01/input.txt")
 
 	total := 0
 

@@ -20,12 +20,12 @@ type Symbol struct {
 }
 
 func main() {
-	lines := common.ReadFile("day_03/input_2.txt")
+	lines := common.ReadFile("day_03/input.txt")
 
 	total := 0
 
 	possibleNumbers := make([]PossibleNumber, 0)
-	possibleGears := make([]Symbol, 0)
+	symbols := make([]Symbol, 0)
 
 	for l, line := range lines {
 		for i := 0; i < len(line); i++ {
@@ -56,47 +56,44 @@ func main() {
 						End:   end,
 					})
 				} else {
-					if char != '*' {
-						continue
-					}
-
-					// this is a possible gear
-					possibleGears = append(possibleGears, Symbol{
+					// this is a symbol
+					symbols = append(symbols, Symbol{
 						Value: string(char),
 						Row:   l,
 						Col:   i,
 					})
 
-					fmt.Printf("Possible Gear: %v %v %v\n", string(char), l, i)
+					fmt.Printf("Symbol: %v %v %v\n", string(char), l, i)
 				}
 			}
 		}
 	}
 
-	// now we have all the possible numbers and possibleGears
-	// we need to figure out which ones are the gears and which numbers are adjacent to them
+	// now we have all the possible numbers and symbols
+	// we need to figure out which numbers are valid (adjacent to symbols)
+	// and which are not
+	for _, number := range possibleNumbers {
+		valid := false
 
-	for _, symbol := range possibleGears {
-		adjacentNumbers := []PossibleNumber{}
-
-		for _, number := range possibleNumbers {
+		for _, symbol := range symbols {
 			if symbol.Row == number.Row {
 				// same row
 				if symbol.Col == number.Start-1 || symbol.Col == number.End+1 {
-					adjacentNumbers = append(adjacentNumbers, number)
+					valid = true
+					break
 				}
 			} else if symbol.Row == number.Row-1 || symbol.Row == number.Row+1 {
 				// adjacent row
 				if symbol.Col >= number.Start-1 && symbol.Col <= number.End+1 {
-					adjacentNumbers = append(adjacentNumbers, number)
+					valid = true
+					break
 				}
 			}
 		}
 
-		valid := len(adjacentNumbers) == 2
-
 		if valid {
-			total += adjacentNumbers[0].Value * adjacentNumbers[1].Value
+			fmt.Printf("Valid number: %v %v %v\n", number.Value, number.Start, number.End)
+			total += number.Value
 		}
 	}
 

@@ -20,12 +20,12 @@ type Symbol struct {
 }
 
 func main() {
-	lines := common.ReadFile("day_03/input_1.txt")
+	lines := common.ReadFile("day_03/input.txt")
 
 	total := 0
 
 	possibleNumbers := make([]PossibleNumber, 0)
-	symbols := make([]Symbol, 0)
+	possibleGears := make([]Symbol, 0)
 
 	for l, line := range lines {
 		for i := 0; i < len(line); i++ {
@@ -56,44 +56,47 @@ func main() {
 						End:   end,
 					})
 				} else {
-					// this is a symbol
-					symbols = append(symbols, Symbol{
+					if char != '*' {
+						continue
+					}
+
+					// this is a possible gear
+					possibleGears = append(possibleGears, Symbol{
 						Value: string(char),
 						Row:   l,
 						Col:   i,
 					})
 
-					fmt.Printf("Symbol: %v %v %v\n", string(char), l, i)
+					fmt.Printf("Possible Gear: %v %v %v\n", string(char), l, i)
 				}
 			}
 		}
 	}
 
-	// now we have all the possible numbers and symbols
-	// we need to figure out which numbers are valid (adjacent to symbols)
-	// and which are not
-	for _, number := range possibleNumbers {
-		valid := false
+	// now we have all the possible numbers and possibleGears
+	// we need to figure out which ones are the gears and which numbers are adjacent to them
 
-		for _, symbol := range symbols {
+	for _, symbol := range possibleGears {
+		adjacentNumbers := []PossibleNumber{}
+
+		for _, number := range possibleNumbers {
 			if symbol.Row == number.Row {
 				// same row
 				if symbol.Col == number.Start-1 || symbol.Col == number.End+1 {
-					valid = true
-					break
+					adjacentNumbers = append(adjacentNumbers, number)
 				}
 			} else if symbol.Row == number.Row-1 || symbol.Row == number.Row+1 {
 				// adjacent row
 				if symbol.Col >= number.Start-1 && symbol.Col <= number.End+1 {
-					valid = true
-					break
+					adjacentNumbers = append(adjacentNumbers, number)
 				}
 			}
 		}
 
+		valid := len(adjacentNumbers) == 2
+
 		if valid {
-			fmt.Printf("Valid number: %v %v %v\n", number.Value, number.Start, number.End)
-			total += number.Value
+			total += adjacentNumbers[0].Value * adjacentNumbers[1].Value
 		}
 	}
 

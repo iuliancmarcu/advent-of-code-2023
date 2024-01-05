@@ -10,7 +10,7 @@ import (
 )
 
 var (
-	cards = []rune{'2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'}
+	cards = []rune{'J', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'Q', 'K', 'A'}
 	prime = 7919
 )
 
@@ -18,7 +18,7 @@ func parseInput() ([]string, map[string]int) {
 	hands := make([]string, 0)
 	bids := make(map[string]int)
 
-	lines := common.ReadFile("day_07/input_1.txt")
+	lines := common.ReadFile("day_07/input.txt")
 
 	for _, line := range lines {
 		parts := strings.Split(line, " ")
@@ -62,14 +62,23 @@ func maxRight(arr []int) (int, int) {
 func getHandScore(hand string) float64 {
 	handCards := []rune(hand)
 
+	jokers := 0
 	counter := make([]int, len(cards))
 
 	for _, card := range handCards {
+		if card == 'J' {
+			jokers++
+			continue
+		}
+
 		counter[cardIndex((card))]++
 	}
 
-	_, max := maxRight(counter)
+	maxIndex, max := maxRight(counter)
 	// fmt.Printf("Hand: %v - Max: %v (%v)\n", hand, val, i)
+
+	counter[maxIndex] += jokers
+	max += jokers
 
 	pairCount := 0
 	for _, count := range counter {

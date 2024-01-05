@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	lines := common.ReadFile("day_04/input_2.txt")
+	lines := common.ReadFile("day_04/input.txt")
 
 	cardCopies := make(map[int]int)
 

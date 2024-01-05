@@ -12,7 +12,7 @@ var digits = [...]string{
 }
 
 func main() {
-	lines := common.ReadFile("day_01/input_2.txt")
+	lines := common.ReadFile("day_01/input.txt")
 
 	total := 0
 
